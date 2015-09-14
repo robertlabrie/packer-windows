@@ -86,7 +86,7 @@
     {
       "type": "windows-shell",
       "inline": [
-        "dir"
+        "pause"
       ]
     }
   ],
