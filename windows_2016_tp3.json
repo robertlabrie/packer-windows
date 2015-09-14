@@ -2,7 +2,7 @@
   "builders": [
     {
       "type": "vmware-iso",
-      "iso_url": "http://care.dlservice.microsoft.com/dl/download/evalx/win7/x64/EN/7600.16385.090713-1255_x64fre_enterprise_en-us_EVAL_Eval_Enterprise-GRMCENXEVAL_EN_DVD.iso",
+      "iso_url": "iso/WIN2016TP3-10514.0.150808-1529.TH2_RELEASE_SERVER_OEMRET_X64FRE_EN-US.iso",
       "iso_checksum_type": "none",
       "headless": true,
 	  "communicator": "winrm",
@@ -11,16 +11,16 @@
       "boot_wait": "2m",
       "ssh_username": "packer",
       "ssh_password": "packer",
-      "ssh_wait_timeout": "8h",
+      "ssh_wait_timeout": "6h",
       "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
-      "guest_os_type": "windows7-64",
+      "guest_os_type": "windows8srv-64",
       "tools_upload_flavor": "windows",
       "disk_size": 61440,
       "vnc_port_min": 5901,
       "vnc_port_max": 5980,
       "floppy_files": [
-        "./answer_files/7/Autounattend.xml",
-        "./scripts_unattend/*"
+        "./answer_files/2016_tp3/Autounattend.xml",
+		"./scripts_unattend/*"
       ],
       "vmx_data": {
         "RemoteDisplay.vnc.enabled": "false",
@@ -32,22 +32,22 @@
     },
     {
       "type": "virtualbox-iso",
-      "iso_url": "http://care.dlservice.microsoft.com/dl/download/evalx/win7/x64/EN/7600.16385.090713-1255_x64fre_enterprise_en-us_EVAL_Eval_Enterprise-GRMCENXEVAL_EN_DVD.iso",
+      "iso_url": "iso/WIN2016TP3-10514.0.150808-1529.TH2_RELEASE_SERVER_OEMRET_X64FRE_EN-US.iso",
       "iso_checksum_type": "none",
-      "headless": true,
+      "headless": false,
       "boot_wait": "2m",
 	  "communicator": "winrm",
 	  "winrm_username": "packer",
-	  "winrm_password": "packer",
-      "ssh_username": "packer",
-      "ssh_password": "packer",
-      "ssh_wait_timeout": "8h",
+	  "winrm_password": "packer",	  
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_wait_timeout": "6h",
       "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
-      "guest_os_type": "Windows7_64",
+      "guest_os_type": "Windows2012_64",
       "disk_size": 61440,
       "floppy_files": [
-        "./answer_files/7/Autounattend.xml",
-        "./scripts_unattend/*"
+        "./answer_files/2016_tp3/Autounattend.xml",
+		"./scripts_unattend/*"
       ],
       "vboxmanage": [
         [
@@ -89,13 +89,13 @@
         "dir"
       ]
     }
-  ],
+  ], 
   "post-processors": [
     {
       "type": "vagrant",
       "keep_input_artifact": false,
-      "output": "windows_7_{{.Provider}}.box",
-      "vagrantfile_template": "vagrantfile-windows_7.template"
+      "output": "windows_2016_tp3_{{.Provider}}.box",
+      "vagrantfile_template": "vagrantfile-windows_2016_tp3.template"
     },
 	{
 		"type":"compress",
